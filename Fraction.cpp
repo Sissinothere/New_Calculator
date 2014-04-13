@@ -1,32 +1,43 @@
 #include "Fraction.h"
-//here  //
+//here
 Fraction::Fraction(string sValue)
 {
+    bool isNeg = false;
     string tempnum1 = "";
     string tempden1 = "";
      int i=0;
+     if (sValue.at(0)=='-'){
+         isNeg = true;
+         sValue.erase(sValue.begin());
+     }
     for(i; sValue[i]!='/' &&i<=sValue.length();i++){
         sValue += sValue[i-1];
+       // cout << "this is svalue "<<sValue<<endl;
         //string type num1 = s;
     }
+     //cout << "this is svalue "<<sValue<<endl;
     i++;
 
     for((i+1);sValue[i]!='/';i++){
         tempden1 += sValue[i];
-    }
 
+    }
+//cout << "this is tempden1 "<<tempden1<<endl;
    // strden1 = tempden1;
     i++;
 
-    for(i;i<sValue.length();i++){
-        tempnum1 += sValue[i];
-    }
-
+    //for(i;i<sValue.length();i++){
+       // tempnum1 += sValue[i];
+    //}
+//cout << "this is tempnum1 "<<tempnum1<<endl;
    // strnum1 = tempnum1;
 
     num1 = atoi(sValue.c_str());
-    den1 = atoi(tempden1.c_str());
+    if (isNeg) num1*(-1);
+    //cout << "this is num1" << endl;
 
+    den1 = atoi(tempden1.c_str());
+    //cout << "this is den1 "<<den1<<endl;
     this->num1 = num1;
     this->den1 = den1;
 
@@ -124,16 +135,51 @@ void Fraction::Addition(Fraction& fracB){
          //new_fraction = 2;	lcd =3
 
          //cout << new_fraction << "/" << lcd<< endl;
+         for(int i=1;i<=new_fraction && i<=lcd;i++){
+    	 if(new_fraction%i==0 && lcd%i == 0 ){
+               gcd=i;
+          }
+         }
+         //lcd = (num1 * den1) / gcd;
+
+         this->new_fraction = (new_fraction)/ gcd;
+         this->lcd = (lcd)/gcd;
+
+         if(this->lcd == 1){
+             ostringstream convert;
+             convert << new_fraction;
+             answer = convert.str();
+         }
+         else if(this->lcd != 1){
     	 ostringstream convert;
     	 convert <<new_fraction << "/" << lcd;
     	 answer = convert.str();
+         }
 
     }
      else if (new_fraction > lcd){
          //cout << new_fraction << "/" << lcd << endl;
-         ostringstream convert;
-         convert <<new_fraction << "/" << lcd;
-         answer = convert.str();
+         for(int i=1;i<=new_fraction && i<=lcd;i++){
+    	 if(new_fraction%i==0 && lcd%i == 0 ){
+               gcd=i;
+          }
+         }
+         //lcd = (num1 * den1) / gcd;
+
+         this->new_fraction = (new_fraction)/ gcd;
+         this->lcd = (lcd)/gcd;
+
+
+         if(this->lcd == 1){
+             ostringstream convert;
+             convert << new_fraction;
+             answer = convert.str();
+         }
+         else if(this->lcd != 1){
+    	 ostringstream convert;
+    	 convert <<new_fraction << "/" << lcd;
+    	 answer = convert.str();
+         }
 //
     }
 
@@ -226,23 +272,55 @@ void Fraction::Addition(Fraction& fracB){
         }
         
        if (new_fraction < lcd){
-        for (int i = new_fraction; i >=0; i--){
-            if (new_fraction%i ==0 && lcd%i==0){
-             ostringstream convert;
-                        convert << "The answer is: "<< new_fraction/i << "/" << lcd/i;
-                        answer = convert.str();
-                        //cout << "The answer is: "<< new_fraction/i << "/" << lcd/i;
+         //new_fraction = 2;	lcd =3
 
-            }
-        }
+         //cout << new_fraction << "/" << lcd<< endl;
+         for(int i=1;i<=new_fraction && i<=lcd;i++){
+    	 if(new_fraction%i==0 && lcd%i == 0 ){
+               gcd=i;
+          }
+         }
+         //lcd = (num1 * den1) / gcd;
+
+         this->new_fraction = (new_fraction)/ gcd;
+         this->lcd = (lcd)/gcd;
+
+         if(this->lcd == 1){
+             ostringstream convert;
+             convert << new_fraction;
+             answer = convert.str();
+         }
+         else if(this->lcd != 1){
+    	 ostringstream convert;
+    	 convert <<new_fraction << "/" << lcd;
+    	 answer = convert.str();
+         }
+
     }
-    if (new_fraction > lcd){
-        for(int i = lcd; i >=0; i--){
-            //cout << "The answer is: " << new_fraction/i << "/" << lcd/i;
-            ostringstream convert;
-                        convert << "The answer is: " << new_fraction/i << "/" << lcd/i;
-                        answer = convert.str();
-        }
+    else if (new_fraction > lcd){
+         //cout << new_fraction << "/" << lcd << endl;
+         for(int i=1;i<=new_fraction && i<=lcd;i++){
+    	 if(new_fraction%i==0 && lcd%i == 0 ){
+               gcd=i;
+          }
+         }
+         //lcd = (num1 * den1) / gcd;
+
+         this->new_fraction = (new_fraction)/ gcd;
+         this->lcd = (lcd)/gcd;
+
+
+         if(this->lcd == 1){
+             ostringstream convert;
+             convert << new_fraction;
+             answer = convert.str();
+         }
+         else if(this->lcd != 1){
+    	 ostringstream convert;
+    	 convert <<new_fraction << "/" << lcd;
+    	 answer = convert.str();
+         }
+//
     }
     if(new_fraction == lcd){
         //cout << "The answer is: 1";
@@ -269,7 +347,7 @@ void Fraction::Addition(Fraction& fracB){
 
 
 
- void Fraction::Multiplication(Fraction& frac){
+ void Fraction::Multiplication(Fraction& fracB){
     
      
     
@@ -280,32 +358,60 @@ void Fraction::Addition(Fraction& fracB){
     }
     
     //Multiplication Error!!!! Can someone please solve this??
-    final_num = num1 * frac.getNumerator();
-    final_den = den1 * frac.getDenominator();
+    final_num = num1 * fracB.getNumerator();
+    final_den = den1 * fracB.getDenominator();
+
+    //cout <<"NUM1 and DEN1" << final_num << "/" << final_den << endl;
     
-       if (final_num < final_den){
-        for (int i = final_num; i >=0; i--){
-            if (final_num%i ==0 && final_den%i==0){
-                                ostringstream convert;
-                                convert << "The answer is: " << final_num/i << "/" << final_den/i;
-                                answer = convert.str();
-                //cout << "The answer is: " << final_num/i << "/" << final_den/i << endl;
 
-            }
-        }
+    if (final_num < final_den){
+        for(int i=1;i<=final_num && i<=final_den;i++){
+    	 if(final_num%i==0 && final_den%i == 0 ){
+               gcd=i;
+          }
+         }
+         //lcd = (num1 * den1) / gcd;
+
+         reduced_num = (final_num)/ gcd;
+         reduced_den = (final_den)/gcd;
+
+         //cout << reduced_num <<"/"<< reduced_den << endl;
+         ostringstream convert;
+         convert << reduced_num <<"/"<< reduced_den << endl;
+         answer = convert.str();
+
+         if(reduced_den == 1){
+             ostringstream convert;
+             convert << reduced_num;
+             answer = convert.str();
+         }
     }
-    if (final_num > final_den){
-        for(int i = final_den; i >=0; i--){
-                                ostringstream convert;
-                                convert <<"The answer is: "<< final_num/i << "/" << final_den/i;
-                                answer = convert.str();
-            //cout <<"The answer is: "<< final_num/i << "/" << final_den/i << endl;
 
-        }
+    if (final_num > final_den){
+        for(int i=1;i<=final_num && i<=final_den;i++){
+    	 if(final_num%i==0 && final_den%i == 0 ){
+               gcd=i;
+          }
+         }
+         //lcd = (num1 * den1) / gcd;
+
+         reduced_num = (final_num)/ gcd;
+         reduced_den = (final_den)/gcd;
+
+         //cout << reduced_num <<"/"<< reduced_den << endl;
+         ostringstream convert;
+         convert << reduced_num <<"/"<< reduced_den << endl;
+         answer = convert.str();
+
+         if(reduced_den == 1){
+             ostringstream convert;
+             convert << reduced_num;
+             answer = convert.str();
+         }
     }
     if(final_num == final_den){
             ostringstream convert;
-            convert << "The answer is: 1";
+            convert << 1;
             answer = convert.str();
                 //cout << "The answer is: 1";
 
@@ -320,8 +426,7 @@ void Fraction::Addition(Fraction& fracB){
 
     
 
-void Fraction::Division(Fraction& frac){
-    
+void Fraction::Division(Fraction& fracB){
     
     
      if(den1 == 0)
@@ -329,38 +434,67 @@ void Fraction::Division(Fraction& frac){
         cout << "Cannot solve equation!!!!" << endl;
         
     }
+
+     //cout <<"fracB.getDenominator is: " << fracB.getDenominator() << endl;
     
      // Division Error!!! Can someone please solve this
-    final_num = num1 * frac.getDenominator();
-    final_den = den1 * frac.getNumerator();
+    final_num = num1 * fracB.getDenominator();
+    final_den = den1 * fracB.getNumerator();
+
+    cout << "FRACTION IS: " << final_num << final_den << endl;
     
     if (final_num < final_den){
-        for (int i = final_num; i >=0; i--){
-            if (final_num%i ==0 && final_den%i==0){
-                            ostringstream convert;
-                            convert << "The answer is: " << final_num/i << "/" << final_den/i;
-                            answer = convert.str();
-                //cout << "The answer is: " << final_num/i << "/" << final_den/i << endl;
+        for(int i=1;i<=final_num && i<=final_den;i++){
+    	 if(final_num%i==0 && final_den%i == 0 ){
+               gcd=i;
+          }
+         }
+         //lcd = (num1 * den1) / gcd;
 
-            }
-        }
+         reduced_num = (final_num)/ gcd;
+         reduced_den = (final_den)/gcd;
+
+         //cout << reduced_num <<"/"<< reduced_den << endl;
+         ostringstream convert;
+         convert << reduced_num <<"/"<< reduced_den << endl;
+         answer = convert.str();
+
+         if(reduced_den == 1){
+             ostringstream convert;
+             convert << reduced_num;
+             answer = convert.str();
+         }
     }
     if (final_num > final_den){
-        for(int i = final_den; i >=0; i--){
-                    ostringstream convert;
-                    convert <<"The answer is: "<< final_num/i << "/" << final_den/i;
-                    answer = convert.str();
-            //cout <<"The answer is: "<< final_num/i << "/" << final_den/i << endl;
+        for(int i=1;i<=final_num && i<=final_den;i++){
+    	 if(final_num%i==0 && final_den%i == 0 ){
+               gcd=i;
+          }
+         }
+         //lcd = (num1 * den1) / gcd;
 
-        }
+         reduced_num = (final_num)/ gcd;
+         reduced_den = (final_den)/gcd;
+
+         //cout << reduced_num <<"/"<< reduced_den << endl;
+         ostringstream convert;
+         convert << reduced_num <<"/"<< reduced_den << endl;
+         answer = convert.str();
+
+         if(reduced_den == 1){
+             ostringstream convert;
+             convert << reduced_num;
+             answer = convert.str();
+         }
     }
     if(final_num == final_den){
-                    ostringstream convert;
-                    convert << "The answer is: 1";
-                    answer = convert.str();
-        //cout << "The answer is: 1";
+            ostringstream convert;
+            convert << 1;
+            answer = convert.str();
+                //cout << "The answer is: 1";
 
     }
+
     
         else{
             ostringstream convert;

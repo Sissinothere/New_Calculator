@@ -18,8 +18,8 @@ private:
     
     int lcd;
     int gcd;
-//    int reduced_num;
-//    int reduced_den;
+    int reduced_num;
+    int reduced_den;
 //    int new_num1;
 //    int new_num2;
     int a;
@@ -34,7 +34,7 @@ private:
     bool cansimptoInt=false;
     
 public:
-    //
+    
     Fraction(string sValue);
     
     int getFraction();

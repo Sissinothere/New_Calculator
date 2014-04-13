@@ -467,9 +467,16 @@ void NobracketString::divide(string Anumb,string Atype, string Bnumb, string Bty
 						isReturnOneNumb = true;
 				}
 			}
-//			else{	//if not the same type
-//				cout<<"add a different type value"<<endl;
-//			}
+			else if((Atype=="frac"&&Btype=="int")||(Btype=="frac"&&Atype=="int"))	{	//if not the same type
+				cout<<"im doing frac and int Multiplication"<<endl;
+				Fraction* fra = new Fraction(Anumb);
+				Fraction* frb = new Fraction(Bnumb);
+				fra->Multiplication(*frb);
+				opAnswer = fra->getAnswer();
+				isReturnOneNumb = true;
+			}else{
+				cout<<"different type Multiplication"<<endl;
+			}
 }
 
  void NobracketString::calculating(){
@@ -490,7 +497,7 @@ void NobracketString::divide(string Anumb,string Atype, string Bnumb, string Bty
   			cout<<"i is : "<<i<<endl;//if op has '*'
   			if(i==0){
   				cout<<"if(i==0){ : "<<endl;// if '*' in the index position 0
-
+  				cout<<"im doing multip calculation here"<<endl;
   				cout<<endl;
   				Multip(somenumbs[0],type[0],somenumbs[1],type[1]);		//do the mulip()
   				if(isReturnOneNumb){									//if the answer == is return one value example: log_3:4;
