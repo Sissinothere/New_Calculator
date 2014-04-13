@@ -511,11 +511,17 @@ void nthRoot::multiply(nthRoot& rt)
 		rt.formNewRoot();
 		someroot = rt.someroot;
 	}
-	else
+	else if(n == rt.getN())
 	{
-		someroot = getSimp() + "*" + rt.getSimp();
+		scal = scal * rt.getScal();
+		num = num * rt.getNum();
+		simplify();
+		//formNewRoot();
+		someroot = getSimp();  // + "*" + rt.getSimp();
 		//cout << someroot << endl;
 	}
+	else
+		someroot = getSimp() + "*" + rt.getSimp();
 }
 
 void nthRoot::divide(nthRoot& rt)
