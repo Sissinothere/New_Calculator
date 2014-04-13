@@ -2,12 +2,12 @@
 #include "Logs.h"
 #include "Integers.h"
 #include "nthRoot.h"
-//#include "Pi.h"
+#include "Pi.h"
 #include "Exponential.h"
 #include "Fraction.h"
 #include "Exponent.h"
 
-//
+
 /*
  *
 update (4/8):
@@ -91,15 +91,15 @@ void NobracketString::simplifynumbers(){ //maybe need to delete the object I cre
 	string tempnumb = somenumbs[i];
 	cout<<"tempnumb is "<<tempnumb<<endl;
 
-	if(tempnumb.find("/")<100){					//im each value, if it contains /,
+	if(tempnumb.find("/")<100 && tempnumb.find("p")>100){					//im each value, if it contains /,
 		cout<<"im in fraction"<<endl;
 		Fraction* fra = new Fraction(somenumbs[i]);
 		somenumbs[i]=fra->getAnswer();	//change the vector number to the 		simplify number.
 		//fra->Reduction();				//this = numb1
  		tempnumb = fra->getAnswer();
  		cout<<"tempnumb is after simplify "<<tempnumb<<endl;
-		if(fra->canSimplifytoInteger())			//if it simplifies to int
-			type.push_back("int");			// put "int" in the vector type;
+		if(fra->canSimplifytoInteger())	{		//if it simplifies to int
+			type.push_back("int");	}		// put "int" in the vector type;
 		else
 			type.push_back("frac");
 	}
@@ -194,7 +194,7 @@ void NobracketString::add(string Anumb, string Atype, string Bnumb, string Btype
 		if(Atype == "frac")
 		{
 			Fraction* fra = new Fraction(Anumb);
-			Fraction* frb = new Fraction(Anumb);
+			Fraction* frb = new Fraction(Bnumb);
 			fra->Addition(*frb);
 			opAnswer = fra->getAnswer();
 			isReturnOneNumb = true;
@@ -408,7 +408,7 @@ void NobracketString::divide(string Anumb,string Atype, string Bnumb, string Bty
 				if(Atype == "frac")
 				{
 					Fraction* fra = new Fraction(Anumb);
-					Fraction* frb = new Fraction(Anumb);
+					Fraction* frb = new Fraction(Bnumb);
 					fra->Multiplication(*frb);
 					opAnswer = fra->getAnswer();
 					isReturnOneNumb = true;				// here may need to delete the object.
@@ -437,7 +437,7 @@ void NobracketString::divide(string Anumb,string Atype, string Bnumb, string Bty
 				else if(Atype=="root")
 				{
 					nthRoot* nthNumb = new nthRoot(Anumb);
-					nthRoot* B = new nthRoot(Anumb);
+					nthRoot* B = new nthRoot(Bnumb);
 					nthNumb->multiply(*B);
 					opAnswer = nthNumb->getAns();
 					if(opAnswer.find("*")<100)			//if the opanswer string contains "+", means it return a complex expression
