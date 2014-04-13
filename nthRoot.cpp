@@ -539,7 +539,6 @@ void nthRoot::divide(nthRoot& rt)
 		}
 		else if(n == rt.getN() && num%rt.getNum() == 0)
 		{
-			cout <<"what the fuck" << endl;
 			scal = scal * rt.getScal();
 			rt.scal = 1;
 			num = num / rt.getNum();
