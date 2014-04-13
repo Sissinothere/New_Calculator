@@ -53,3 +53,6 @@ public:
 #endif	/* FRACTION_H */
 
 };
+
+
+
