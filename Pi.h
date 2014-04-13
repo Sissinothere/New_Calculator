@@ -16,28 +16,28 @@
 using namespace std;
 
 
-class Pi{
-	double Pi_value;
-	int coefficient;
-	string sCoefficient;
-	char* sValue;
-	string answer;
-	stringstream coefficientHandle;
+class Pi
+{
+        double Pi_value;
+        int coefficient;
+        int powerCount;
+        string sValue;
+        string answer;
+        stringstream coefficientHandle;
 
 public:
 
-	Pi(char* sValue);
-	Pi(string sValue);
-	void setCoefficient();
-	int getCoefficient();
-	string getAnswer();
+        Pi(string sValue);
+        void setCoefficient();
+        int getCoefficient();
+        string getAnswer();
+        void clearBuffer();
 
-	void Multiply(Pi& in);
-	void Divide(Pi& in);
-	void Add(Pi& in);
-	void Subtract(Pi& in);
+        void Multiply(Pi& in);
+        void Divide(Pi& in);
+        void Add(Pi& in);
+        void Subtract(Pi& in);
 };
 
 
 #endif /* PI_H_ */
-
