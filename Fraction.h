@@ -34,7 +34,7 @@ private:
     bool cansimptoInt=false;
     
 public:
-    
+    //
     Fraction(string sValue);
     
     int getFraction();
