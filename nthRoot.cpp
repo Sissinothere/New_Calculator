@@ -528,6 +528,7 @@ void nthRoot::divide(nthRoot& rt)
 {
 	if(scal%rt.getScal() == 0)
 	{
+		
 		if(num == rt.getNum() && n == rt.getN())
 		{
 			scal = scal / rt.getScal();
@@ -536,17 +537,64 @@ void nthRoot::divide(nthRoot& rt)
 			someroot = strScal;
 			//cout << someroot << endl;
 		}
+		else if(n == rt.getN() && num%rt.getNum() == 0)
+		{
+			cout <<"what the fuck" << endl;
+			scal = scal * rt.getScal();
+			rt.scal = 1;
+			num = num / rt.getNum();
+			simplify();
+			//formNewRoot();
+			someroot = getSimp();  // + "*" + rt.getSimp();
+			//cout << someroot << endl;
+		}
 		else
 		{
+			
 			scal = scal / rt.getScal();
 			rt.scal = 1;
 			someroot = getSimp() + "/" + rt.getSimp();
 			//cout << someroot << endl;
 		}
 	}
-	else
+	else 
 	{
-		someroot = getSimp() + "/" + rt.getSimp();
+		if(scal%rt.getScal() != 0)
+		{
+			if(num == rt.getNum() && n == rt.getN())
+			{
+				
+				//scal = scal / rt.getScal();
+				//cout << scal << endl;
+				//formNewRoot();
+				someroot = strScal + "/" + rt.strScal;
+				//cout << someroot << endl;
+			}
+			else if(n == rt.getN() && num%rt.getNum() == 0)
+			{
+			
+				int tempScalTop = scal;
+				int tempScalBot = rt.getScal();
+				string scalTop;
+				string scalBot;
+				ss << tempScalTop;
+				ss >> scalTop;
+				ss.clear();
+				ss << tempScalBot;
+				ss >> scalBot;
+				strScal = "1";
+				rt.strScal = "1";
+				num = num / rt.getNum();
+				simplify();
+				someroot = scalTop + "/" + scalBot + "*" + getSimp();  // + "*" + rt.getSimp();
+				//cout << someroot << endl;
+			}
+		}	
+		else
+		{
+			 
+			someroot = getSimp() + "/" + rt.getSimp();
+		}
 	}
 }
 
