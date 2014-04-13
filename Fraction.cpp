@@ -1,5 +1,5 @@
 #include "Fraction.h"
-//here
+//here  //
 Fraction::Fraction(string sValue)
 {
     string tempnum1 = "";
