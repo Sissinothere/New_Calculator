@@ -6,7 +6,7 @@
 #include <string>
 #include "Fraction.h"
 using namespace std;
-
+///write about logs in parens
 Fraction::Fraction(string sValue){
 	isInt= false;
 	cout << "this is the constructor"<< endl;
@@ -47,7 +47,7 @@ void Fraction::checkValues(){
 	string temp="";
 	int i=0;
 	isInt=true;
-	for(int i; i<input.length();i++){
+	for(i; i<input.length();i++){
 		if(input[i]=='/'){
 			isInt=false;
 			cout << "this is false"<<endl;
