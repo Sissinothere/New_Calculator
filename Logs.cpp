@@ -118,6 +118,8 @@ void Logs::Simplify(){
 	cout<<"in log getSimplify function"<<endl;
 	double result;
 	string value;
+	cout <<"str base is "<< strbase<<endl;
+		cout <<"str numb is "<<strnumb<<endl;
 	if(canSimplifytoInt()){
 		result= log(numb)/log(base);
 		ss<<result;
@@ -133,6 +135,8 @@ void Logs::Simplify(){
 		somelog = value;
 	}
 	else{}//do nothing;
+	cout <<"str base is "<< strbase<<endl;
+	cout <<"str numb is "<<strnumb<<endl;
 }
 
 string Logs::getSimplify(){
@@ -143,6 +147,13 @@ string Logs::getSimplify(){
 	ss>>temp;
 	if(canSimplifytoFra()||canSimplifytoInt()){
 		if(getFrontIntNumb()==1){
+			cout <<"this is strnumb[2]"<< strnumb[2]<<endl;
+				if (strbase[0]=='e'&& strnumb[0]=='e'&&strnumb.length()>2){
+					somelog = strnumb[2];
+				}
+				if (strbase[0]=='p'&& strnumb[0]=='p'&&strnumb.length()>3){
+									somelog = strnumb[3];
+								}
 			return somelog;
 		}else if(getFrontIntNumb()==-1){
 			return "-"+somelog;
@@ -151,7 +162,12 @@ string Logs::getSimplify(){
 	}
 	else{			//somelog is a log type
 		temp =somelog;
+		cout <<"this is strnumb[2]"<< strnumb[2]<<endl;
+			//if (strbase[0]=='e'&& strnumb[0]=='e'){
+				//somelog = strnumb[2];
+			//}
 	}
+
 	//temp +=somelog;
 	cout<<"temp is "<<temp<<endl;
 	cout<<"Logs::getSimplify() "<<temp<<endl;
@@ -247,6 +263,8 @@ double Logs::getFrontIntNumb(){
 	return frontIntNumb;
 }
 string Logs::getAnswer(){
+
+
 	return somelog;
 }
 //string Logs::getStrfronstrNumb(){
