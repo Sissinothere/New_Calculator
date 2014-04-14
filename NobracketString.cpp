@@ -4,8 +4,8 @@
 #include "nthRoot.h"
 #include "Pi.h"
 #include "Exponential.h"
-#include "Fraction.h"
 #include "Exponent.h"
+#include "Fraction.h"
 
 
 /*
@@ -340,7 +340,7 @@ void NobracketString::substract(string Anumb,string Atype, string Bnumb, string 
 			{
 				Fraction* fra = new Fraction(Anumb);
 				Fraction* frb = new Fraction(Bnumb);
-				fra->Subtraction(*frb);
+				//fra->Subtraction(*frb);
 				opAnswer = fra->getAnswer();
 				isReturnOneNumb = true;				// here may need to delete the object.
 			}
@@ -556,10 +556,10 @@ void NobracketString::divide(string Anumb,string Atype, string Bnumb, string Bty
 				if((Atype=="frac"&&Btype=="int")||(Btype=="frac"&&Atype=="int")){	//if not the same type
 					cout<<"im doing frac and int Multiplication"<<endl;
 
-//					Fraction* fra = new Fraction(Anumb);
-//					Fraction* frb = new Fraction(Bnumb);
-//					fra->Multiplication(*frb);
-//					opAnswer = fra->getAnswer();
+					Fraction* fra = new Fraction(Anumb);
+					Fraction* frb = new Fraction(Bnumb);
+					fra->Multiplication(*frb);
+					opAnswer = fra->getAnswer();
 					isReturnOneNumb = true;
 				}else if((Atype=="int"&&Btype=="root")||(Btype=="int"&&Atype=="root")){
 					cout<<"_????root and int Multiplication"<<endl;
