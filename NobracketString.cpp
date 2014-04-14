@@ -9,7 +9,6 @@
 
 
 /*
- *
 update (4/8):
 	1. This class will expected to receive a string of expression, (no brackets);
 	and seperate them into two vectors. one stores value, the other store op;
@@ -43,7 +42,6 @@ log_3:4		+		log		0
  * Integer,Pi,E,NthRoot,Fraction class if you can provide any of these class will be great.
  * I will try to work on Integer class and then I can test integer and Logs type together.
  *
- *
  */
 
 
@@ -64,25 +62,91 @@ NobracketString::~NobracketString() {
 
 void NobracketString:: separateString(){
 											//separateString and store them in the vector somenumbs
-	string temp;
+	cout<<expression<<endl;
 
+	string temp;
+	bool hasTwoOp=false;
+
+	string checkop ="";
 	for(int i=0;i<expression.length();i++){
-		if(expression[i]=='+'||expression[i]=='*'){
+		cout<<"in the loop, i is "<<i <<endl;
+		cout<<"temp is "<<temp<<endl;
+			if(expression[i]=='+'||expression[i]=='*'){
 				op.push_back(expression[i]);
+				cout<<"temp is "<<temp<<endl;
 				somenumbs.push_back(temp);
 				temp = "";
 			}
-			else
-				temp +=expression[i];
-		}
-			somenumbs.push_back(temp);
-	cout<<"before simplify: "<<endl;
-//	for( vector<string>::iterator i = somenumbs.begin(); i != somenumbs.end(); ++i)
-//	     cout << *i << ' ';			//check if I separate string;
-//    cout<<endl;
-			for(int i=0; i<somenumbs.size();i++){
-				cout<<somenumbs[i]<<endl;
+			else if((expression[i]=='^'||expression[i]=='/')&& !hasTwoOp){
+				cout<<"+++++++"<<endl;
+				if(expression[i]=='^'){					//if k is  ^, keep it to tem[;]
+					//temp +=expression[i];
+					for(int k=i;k<expression.length();k++){	//check after ^ if it has / or not;
+						//check for if it has / or not.
+						// cout<<"im cheking for /"<<endl;
+						// cout<<"the i here is "<< i<<endl;
+						if(expression[k]=='/'){
+							cout<<"expression[k]=='/') true"<<endl;
+							hasTwoOp=true;
+							// op.push_back(expression[i]);
+							// cout<<"temp is "<<temp<<endl;
+							// somenumbs.push_back(temp);
+							// temp = "";
+						}else{
+							cout<<"expression[k]=='/') false"<<endl;
+							//temp +=expression[i];
+						}
+					}
+				}
+				else{									//if k is /
+					for(int k=i;k<expression.length();k++){	//check after ^ ifit has / or not;
+						cout<<"the i here is "<< i<<endl;
+						cout<<"im cheking for ^"<<endl;
+						cout<<"if(expression[k]=='/'){ "<<expression[k]<<endl;
+						cout<<endl;
+						if(expression[k]=='^'){
+							cout<<"expression[k]=='^') true"<<endl;
+							hasTwoOp=true;
+						}else{
+
+						}
+					}
+				}
+
 			}
+				if(hasTwoOp){
+					cout<<"has ^ and /"<<endl;
+					cout<<"i what is the next value?: "<<expression[i]<<endl;
+					if(expression[i]=='/'){				//if has / record,
+						cout<<"!!!!has ///////////"<<endl;
+
+						op.push_back(expression[i]);
+						somenumbs.push_back(temp);
+						temp="";
+					}else{
+						temp +=expression[i];
+					}
+				}
+				else if(!hasTwoOp&&expression[i]!='+'&&expression[i]!='*'){
+					cout<<"only have ^ or /" <<endl;
+					temp +=expression[i];
+					cout<<"___temp is now "<<temp;
+					cout<<endl;
+				}
+
+	}
+	somenumbs.push_back(temp);
+	cout<<"before simplify: "<<endl;
+	cout<<"sime numb size is "<<somenumbs.size()<<endl;
+
+	for(int i=0; i<somenumbs.size();i++){
+		cout<<somenumbs[i]<<endl;
+	}
+	cout<<"op is"<<endl;
+	for(int i=0; i<op.size();i++){
+		cout<<op[i]<<endl;
+	}
+	cout<<"checkop is "<<checkop<<endl;
 }
 
 void NobracketString::simplifynumbers(){ //maybe need to delete the object I create here.
@@ -253,13 +317,13 @@ void NobracketString::add(string Anumb, string Atype, string Bnumb, string Btype
 	}else{	//if not the same type
 			cout<<"add a different type value"<<endl;
 			 if((Atype=="root"&&Btype=="int")||(Btype=="int"&&Atype=="root")){
-							cout<<"_______root and int Multiplication"<<endl;
-							nthRoot* nthNumb = new nthRoot(Anumb);
-							nthRoot* B = new nthRoot(Bnumb);
-							nthNumb->add(*B);
-							cout<<"============="<<endl;
-							opAnswer = nthNumb->getAns();
-							cout<<"_________opAnswer is "<<opAnswer<<endl;
+				cout<<"_______root and int Multiplication"<<endl;
+				nthRoot* nthNumb = new nthRoot(Anumb);
+				nthRoot* B = new nthRoot(Bnumb);
+				nthNumb->add(*B);
+				cout<<"============="<<endl;
+				opAnswer = nthNumb->getAns();
+				cout<<"_________opAnswer is "<<opAnswer<<endl;
 							if(opAnswer.find("*")<100)			//if the opanswer string contains "+", means it return a complex expression
 								isReturnOneNumb = true;
 							else
@@ -361,8 +425,13 @@ void NobracketString::divide(string Anumb,string Atype, string Bnumb, string Bty
 					Integers* intnumbB = new Integers(Bnumb);
 					intnumbA->Divide(*intnumbB);
 					opAnswer = intnumbA->getAnswer();					//!!!!!here type has to be a "frac"!!!!!
-										////							//delete[] intnumb;
-					isReturnOneNumb = true;
+
+					cout<<"____in the divition, answer is: "<<opAnswer<<endl;
+							////							//delete[] intnumb;
+//					if(opAnswer.find("/")<100)
+//						isReturnOneNumb = false;
+//					else
+						isReturnOneNumb = true;
 				}
 				else if(Atype=="log")
 				{
@@ -371,8 +440,9 @@ void NobracketString::divide(string Anumb,string Atype, string Bnumb, string Bty
 					lgA->divide(*lgB);
 					opAnswer = lgA->getAnswer();
 												//delete[] lg;
-					if(opAnswer.find("/")<100)			//if the opanswer string contains "+", means it return a complex expression
-						isReturnOneNumb = false;
+					if(opAnswer.find("/")<100){			//if the opanswer string contains "+", means it return a complex expression
+						cout<<"++++++++we return two numb"<<endl;
+						isReturnOneNumb = false;}
 					else
 						isReturnOneNumb = true;
 				}
@@ -527,6 +597,31 @@ void NobracketString::divide(string Anumb,string Atype, string Bnumb, string Bty
   		  		i = 0;
   		  	}
   		temporarySize= op.size();
+  		if(op[i]=='/'){
+  			if(i==0){
+  				divide(somenumbs[0],type[0],somenumbs[1],type[1]);
+  				if(isReturnOneNumb){									//if the answer == is return one value example: log_3:4;
+  				  	cout<<"<<<<<<im in the isReturnOneNumb, opAnswer is "<<opAnswer<<endl;
+  					somenumbs[i]=opAnswer;								//set the element i to the opAnser,
+  				  	somenumbs.erase(somenumbs.begin()+1);			//erase the second element
+  				  	op.erase(op.begin());							//erase the '*'
+  				}else{
+  					cout<<"the '*' sign in the index 0 and the answer return more then one value"<<endl;
+  				}
+  			}else{
+  				cout<<"do the divide."<<endl;
+  				divide(somenumbs[i],type[i],somenumbs[i+1],type[i+1]);
+  				if(isReturnOneNumb){									//if the answer == is return one value example: log_3:4;
+  					somenumbs[i]=opAnswer;								//set the element i to the opAnser,
+  					somenumbs.erase(somenumbs.begin()+(i+1));			//erase the second element
+  					op.erase(op.begin()+(i));							//erase the '*'
+//  					cout<<"the mutip() get answer is now "<<somenumbs[i]<<endl;
+//  					cout<<"im in the calculating function delect '*' sign DOES NOT in the index 0"<<endl;
+  				}
+  				else{
+  					cout<<"the '/' sign DOES NOT in the index 0, and the answer return more then one value"<<endl;}
+  		}
+  		}
   		if(op[i]=='*'){
   			cout<<"i is : "<<i<<endl;//if op has '*'
   			if(i==0){
@@ -668,7 +763,7 @@ void NobracketString::formFinalAnser(){
 	cout<<"1111111111NobracketString::formFinalAnser(){"<<endl;
 	if(op.size()==0){
 		FiAnswer += somenumbs[0];
-		cout<<"FiAnswer += somenumbs[0]; "<<FiAnswer<<endl;
+		cout<<"some# is "<< somenumbs[0]<<"FiAnswer += somenumbs[0]; "<<FiAnswer<<endl;
 	}
 	else{
 	for(i;i<op.size();i++){

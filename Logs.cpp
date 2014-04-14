@@ -35,7 +35,6 @@ Logs::Logs(string str){ //log_50:5
 	cout<<"frontIntNumb is "<<frontIntNumb<<endl;
 	cout<<endl;
 
-
 	for(i; str[i]!='_' &&i<=str.length();i++){				//try to get ride of "log_"
 		s += str[i];
 	}
@@ -151,7 +150,7 @@ string Logs::getSimplify(){
 		//temp = temp + "*" + somelog;
 	}
 	else{			//somelog is a log type
-		temp +=somelog;
+		temp =somelog;
 	}
 	//temp +=somelog;
 	cout<<"temp is "<<temp<<endl;
@@ -256,18 +255,24 @@ string Logs::getAnswer(){
 
 void Logs::FormNewLog(){
 	string newlog;
-//	ss<<frontIntNumb;			//conver front number to string
-//	ss>>strfronumb;
-//	ss.clear();
+	ss<<frontIntNumb;			//conver front number to string
+	ss>>strfronumb;
+	ss.clear();
 	ss<<numb;					//conver numb to string
 	ss>>strnumb;
 	ss.clear();
 	ss<<base;					//conver base to string
 	ss>>strbase;
 	ss.clear();
-	newlog = strfronumb + "log_" + strbase;
-	newlog += ":" + strnumb;
+	if(canSimplifytoInt()&&canSimplifytoFra()){	//if newlog is a integer or a fraction
+		//do nothing
+	}
+	else{
+		newlog = strfronumb + "log_" + strbase;
+		newlog += ":" + strnumb;
+	}
 	somelog=newlog;
+
 }
 
 void Logs::add(Logs& lg){ //need to conver double to string.

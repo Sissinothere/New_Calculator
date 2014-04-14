@@ -34,6 +34,8 @@ void Integers::Divide(Integers& in)
 	int numOne = this->getValue();
 	int numTwo = in.getValue();
 	ostringstream convert;
+	ostringstream ss;
+
 	int ans;
 
 	if(numOne%numTwo == 0)
@@ -44,12 +46,14 @@ void Integers::Divide(Integers& in)
 	}
 	else
 	{
-
 		//ans = "/" + numTwo; //add number to the stream
 		convert << numOne;
 		answer = convert.str() + "/";
-		convert << numTwo;
-		answer += convert.str();
+		cout<<"__________answer is "<< answer<<"numeber two is "<< numTwo<<endl;
+		//convert.clear();
+		ss << numTwo;
+		answer += ss.str();
+		cout<<"__________answer is "<< answer<<"numeber two is "<< numTwo<<endl;
 		//void answer; //return a string with the contents of the stream
 	}
 }
