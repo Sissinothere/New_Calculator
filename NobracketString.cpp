@@ -578,6 +578,7 @@ void NobracketString::divide(string Anumb,string Atype, string Bnumb, string Bty
 				}
 				else{
 					cout<<"i don't know why it does not work!!!!!!"<<endl;
+					isReturnOneNumb=false;
 				}
 
 			}
@@ -667,7 +668,9 @@ void NobracketString::divide(string Anumb,string Atype, string Bnumb, string Bty
   	}					//end of checking '*'
   }
 cout<<endl;
-cout<<"-----------i am between loop"<<endl;
+
+cout<<"-----------i am between loop, return one value: true=1:  "<<isReturnOneNumb<<endl;
+
 int tempSize=0;
   	for(int i=0;i<op.size();i++){				//start to check if they have the same type; ad do the calculation
   		for(int j=i+1;j<op.size()+1;j++)
@@ -676,21 +679,24 @@ int tempSize=0;
   			cout<<endl;
   			cout<<"j is equal "<<j<<"i is "<<i <<"op.size() is "<<op.size()<<endl;
   				cout<<"begin to check for type here"<<endl;
-  				if(type[i]==type[j]&&op[j]=='*'){		//if the op is a *, skip
+  				if((type[i]==type[j]&&op[j]=='*')||(type[i]==type[j]&&op[i]=='*')){		//if the op is a *, skip
   					//do nothing;
-  			//		cout<<"im in the 2+3*log"<<endl;
+  					cout<<"im in the 2+3*log"<<endl;
   				}
-  				else if(type[i]==type[j]&&op[j-1]!='*'){				//if it has same type, and op does not have *,check for operator
+  				else if(type[i]==type[j]&&op[j-1]!='*'&&op[j-1]!='*'){				//if it has same type, and op does not have *,check for operator
   					havesametype = true;
   					if(op[j-1]=='+')
   					{				//only have two case +,-
   						add(somenumbs[j],type[j],somenumbs[i],type[i]);
+  						cout<<endl;
+  						cout<<"isReturnOneNumb is : "<<isReturnOneNumb<<endl;
   						if(isReturnOneNumb)
   						{
+  							cout<<"______is return one number??????"<<endl;
   							somenumbs[i]=opAnswer;							//set the element i to the opAnser,
   							somenumbs.erase(somenumbs.begin()+(j));			//erase the second element
   							op.erase(op.begin()+(j-1));				//erase the op
-  							cout<<"somenumb1 is now"<<somenumbs[i]<<endl;
+  							cout<<"somenumb1 is now: "<<somenumbs[i]<<endl;
   							cout<<"im in the calculating add(),return one value"<<endl;
   						}
   						else

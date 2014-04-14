@@ -159,7 +159,6 @@ nthRoot::nthRoot(string str)
 		this->scal = scal;
 		this->n = n;
 		this->num = num;
-		simplify();
 
 	}
 }

@@ -1,5 +1,4 @@
 #include "Exponent.h"
-#include <stdlib.h>
 
 Exponent::Exponent(string str)
 {
@@ -276,12 +275,7 @@ void Exponent::simplify()
 	}
 	else if(baseIsInt == true && powerIsInt == true)
 	{
-		if(atoi(strPower.c_str()) == 0)
-		{
-			answer = "1";
-		}
-
-		else if(atoi(strPower.c_str()) < 0)
+		if(atoi(strPower.c_str()) < 0)
 		{
 			base = atoi(strBase.c_str());
 			power = atoi(strPower.c_str());
@@ -317,8 +311,7 @@ void Exponent::simplify()
 		exNumerBase = atoi(strExNumerBase.c_str());
 		exDenomBase = atoi(strExDenomBase.c_str());
 		power = atoi(strPower.c_str());
-		
-		
+
 		if(power < 0)
 		{
 			exNumerBase = powerFunc(exNumerBase, -power);
@@ -329,12 +322,8 @@ void Exponent::simplify()
 			exNumerBase = powerFunc(exNumerBase, power);
 			exDenomBase = powerFunc(exDenomBase, power);
 		}
-		
-		if(power == 0)
-		{
-			answer = "1";
-		}
-		else if(exNumerBase%exDenomBase == 0 && power > 0)
+	
+		if(exNumerBase%exDenomBase == 0 && power > 0)
 		{ 
 			simpToInt = true;
 			int tempAnswer = exNumerBase/exDenomBase;

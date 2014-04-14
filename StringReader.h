@@ -14,6 +14,8 @@
 using namespace std;
 
 class StringReader {
+	bool isDiv;
+	int complexC;
 	string input;
 	string finalAnswer;
 
@@ -29,3 +31,4 @@ public:
 };
 
 #endif /* STRINGREADER_H_ */
+
