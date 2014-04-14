@@ -154,7 +154,7 @@ void Fraction::Addition(Fraction& frac){
 						ss<< num1;
 						answer = ss.str();
 			}
-	cout << answer<<endl;
+	cout <<"this is the value stored at answer: "<< answer<<endl;
 
 }
 void Fraction::Multiplication(Fraction& frac){
