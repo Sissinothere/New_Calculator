@@ -69,8 +69,8 @@ void NobracketString:: separateString(){
 
 	string checkop ="";
 	for(int i=0;i<expression.length();i++){
-//		cout<<"in the loop, i is "<<i <<endl;
-//		cout<<"temp is "<<temp<<endl;
+		cout<<"in the loop, i is "<<i <<endl;
+		cout<<"temp is "<<temp<<endl;
 			if(expression[i]=='+'||expression[i]=='*'){
 				op.push_back(expression[i]);
 				cout<<"temp is "<<temp<<endl;
@@ -78,7 +78,7 @@ void NobracketString:: separateString(){
 				temp = "";
 			}
 			else if((expression[i]=='^'||expression[i]=='/')&& !hasTwoOp){
-//				cout<<"+++++++"<<endl;
+				cout<<"+++++++"<<endl;
 				if(expression[i]=='^'){					//if k is  ^, keep it to tem[;]
 					//temp +=expression[i];
 					for(int k=i;k<expression.length();k++){	//check after ^ if it has / or not;
@@ -115,10 +115,10 @@ void NobracketString:: separateString(){
 
 			}
 				if(hasTwoOp){
-//					cout<<"has ^ and /"<<endl;
-//					cout<<"i what is the next value?: "<<expression[i]<<endl;
+					cout<<"has ^ and /"<<endl;
+					cout<<"i what is the next value?: "<<expression[i]<<endl;
 					if(expression[i]=='/'){				//if has / record,
-//						cout<<"!!!!has ///////////"<<endl;
+						cout<<"!!!!has ///////////"<<endl;
 
 						op.push_back(expression[i]);
 						somenumbs.push_back(temp);
@@ -128,9 +128,9 @@ void NobracketString:: separateString(){
 					}
 				}
 				else if(!hasTwoOp&&expression[i]!='+'&&expression[i]!='*'){
-//					cout<<"only have ^ or /" <<endl;
+					cout<<"only have ^ or /" <<endl;
 					temp +=expression[i];
-//					cout<<"___temp is now "<<temp;
+					cout<<"___temp is now "<<temp;
 					cout<<endl;
 				}
 
@@ -257,10 +257,12 @@ void NobracketString::add(string Anumb, string Atype, string Bnumb, string Btype
 	if(Atype==Btype){						//if they are the same type;
 		if(Atype == "frac")
 		{
+			cout<<"______________im doing fraction add()____"<<endl;
 			Fraction* fra = new Fraction(Anumb);
 			Fraction* frb = new Fraction(Bnumb);
 			fra->Addition(*frb);
 			opAnswer = fra->getAnswer();
+			cout<<"____opanswer is : "<<opAnswer<<endl;
 			isReturnOneNumb = true;
 										//same type fraction should always return one numb
 												//delete[] fra;				// here may need to delete the object.
@@ -684,10 +686,11 @@ int tempSize=0;
   					cout<<"im in the 2+3*log"<<endl;
   				}
   				else if(type[i]==type[j]&&op[j-1]!='*'&&op[j-1]!='*'){				//if it has same type, and op does not have *,check for operator
-  					cout<<"=====else if(type[i]==type[j]&"<<type[i]<< "----"<<type[j]<<endl;
+  					cout<<"___typei is "<<type[i]<<"____typej is "<<type[j]<<endl;
   					havesametype = true;
   					if(op[j-1]=='+')
   					{				//only have two case +,-
+  						cout<<"im doing add()_____________"<<endl;
   						add(somenumbs[j],type[j],somenumbs[i],type[i]);
   						cout<<endl;
   						cout<<"isReturnOneNumb is : "<<isReturnOneNumb<<endl;
@@ -727,16 +730,41 @@ int tempSize=0;
   				}
   				else if((type[i]=="frac"&&type[j]=="int") || (type[j]=="frac"&&type[i]=="int"))
   				{
-  					cout<<".........doing frac and int add()"<<endl;
-  					// handle one numb is fraction, one numb is integer
+  										// handle one numb is fraction, one numb is integer
   					havesametype =true;
   					if(op[j-1]=='+')
   					{			//only have two case +,-
+  						cout <<"in first if"<<endl;
   						add(somenumbs[j],"frac",somenumbs[i],"frac");
+  						if(isReturnOneNumb)
+  						  {
+  							somenumbs[i]=opAnswer;							//set the element i to the opAnser,
+  						  	somenumbs.erase(somenumbs.begin()+(j));			//erase the second element
+  						  	op.erase(op.begin()+(j-1));				//erase the op
+  						  	cout<<"somenumb1 is now"<<somenumbs[i]<<endl;
+  						  	cout<<"im in the calculating subtract(),return one value"<<endl;
+  						  }
+  						else
+  						  	{
+  						  	cout<<"im in the calculating subtract(),return more then 1 value"<<endl; //don't change anything.
+  						  }
   					}
   					else
   					{
+  						cout <<"in else "<<endl;
   						substract(somenumbs[j],"frac",somenumbs[i],"frac");
+  						if(isReturnOneNumb)
+  						  {
+  							somenumbs[i]=opAnswer;							//set the element i to the opAnser,
+  						  	somenumbs.erase(somenumbs.begin()+(j));			//erase the second element
+  						  	op.erase(op.begin()+(j-1));				//erase the op
+  						  	cout<<"somenumb1 is now"<<somenumbs[i]<<endl;
+  						  	cout<<"im in the calculating subtract(),return one value"<<endl;
+  						  }
+  						else
+  						  	{
+  						  	cout<<"im in the calculating subtract(),return more then 1 value"<<endl; //don't change anything.
+  						  }
   					}
   				}							//check continue comparing the next type[i+1];
   				cout<<"end check for type here"<<j<<endl;
