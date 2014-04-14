@@ -97,7 +97,7 @@ cout <<"den1 in reduction" << den1<<endl;
 		num1 = 1;
 		den1 = 1;
 
-	}
+	}else{
 
 	stringstream ss;
 		ss<< num1;
@@ -109,6 +109,7 @@ cout <<"den1 in reduction" << den1<<endl;
 					ss<< num1;
 					answer = ss.str();
 		}
+	}
 		cout << answer<<endl;
 }
 
