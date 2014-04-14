@@ -252,6 +252,19 @@ void NobracketString::add(string Anumb, string Atype, string Bnumb, string Btype
 		}
 	}else{	//if not the same type
 			cout<<"add a different type value"<<endl;
+			 if((Atype=="root"&&Btype=="int")||(Btype=="int"&&Atype=="root")){
+							cout<<"_______root and int Multiplication"<<endl;
+							nthRoot* nthNumb = new nthRoot(Anumb);
+							nthRoot* B = new nthRoot(Bnumb);
+							nthNumb->add(*B);
+							cout<<"============="<<endl;
+							opAnswer = nthNumb->getAns();
+							cout<<"_________opAnswer is "<<opAnswer<<endl;
+							if(opAnswer.find("*")<100)			//if the opanswer string contains "+", means it return a complex expression
+								isReturnOneNumb = true;
+							else
+								isReturnOneNumb = true;
+						}
 		}
 }
 
@@ -466,16 +479,37 @@ void NobracketString::divide(string Anumb,string Atype, string Bnumb, string Bty
 					else
 						isReturnOneNumb = true;
 				}
+
 			}
-			else if((Atype=="frac"&&Btype=="int")||(Btype=="frac"&&Atype=="int"))	{	//if not the same type
-				cout<<"im doing frac and int Multiplication"<<endl;
-				Fraction* fra = new Fraction(Anumb);
-				Fraction* frb = new Fraction(Bnumb);
-				fra->Multiplication(*frb);
-				opAnswer = fra->getAnswer();
-				isReturnOneNumb = true;
-			}else{
-				cout<<"different type Multiplication"<<endl;
+			else{
+				cout<<"______doing different type Multiplication____"<<endl;
+				if((Atype=="frac"&&Btype=="int")||(Btype=="frac"&&Atype=="int")){	//if not the same type
+					cout<<"im doing frac and int Multiplication"<<endl;
+
+//					Fraction* fra = new Fraction(Anumb);
+//					Fraction* frb = new Fraction(Bnumb);
+//					fra->Multiplication(*frb);
+//					opAnswer = fra->getAnswer();
+					isReturnOneNumb = true;
+				}else if((Atype=="int"&&Btype=="root")||(Btype=="int"&&Atype=="root")){
+					cout<<"_????root and int Multiplication"<<endl;
+					nthRoot* nthNumb = new nthRoot(Anumb);
+					cout<<"============="<<endl;
+					nthRoot* B = new nthRoot(Bnumb);
+					cout<<"==%%%%%========"<<endl;
+					nthNumb->multiply(*B);
+
+					opAnswer = nthNumb->getAns();
+					cout<<"_________opAnswer is "<<opAnswer<<endl;
+//					if(opAnswer.find("*")<100)			//if the opanswer string contains "+", means it return a complex expression
+//						isReturnOneNumb = true;
+//					else
+						isReturnOneNumb = true;
+				}
+				else{
+					cout<<"i don't know why it does not work!!!!!!"<<endl;
+				}
+
 			}
 }
 
@@ -507,11 +541,17 @@ void NobracketString::divide(string Anumb,string Atype, string Bnumb, string Bty
 //  					cout<<"the mutip() get answer is now "<<somenumbs[i]<<endl;
 //  					cout<<"im in the calculating function delecting the '*' sign in the index 0"<<endl;
   				}
-  				else{cout<<"the '*' sign in the index 0 and the answer return more then one value"<<endl;}								// if the answer return more then one value, example 5*log_3:4;
-  													//keep everything as it is.
+  				/*
+  				 * for 3*sqrt:3+7*sqrt:3 this case;
+  				 */
+  				else{
+  					cout<<"the '*' sign in the index 0 and the answer return more then one value"<<endl;}								// if the answer return more then one value, example 5*log_3:4;
+//  					somenumbs[i]=opAnswer;
+//  					somenumbs.erase(somenumbs.begin()+1);			//erase the second element
+//  					op.erase(op.begin());	//do the mulitify everything as it is.
   			}
   			else{
-  				cout<<"if(i==0){ : else{"<<endl;
+  				cout<<"do the mulitify."<<endl;
   				Multip(somenumbs[i],type[i],somenumbs[i+1],type[i+1]);
   				if(isReturnOneNumb){									//if the answer == is return one value example: log_3:4;
   					somenumbs[i]=opAnswer;								//set the element i to the opAnser,
