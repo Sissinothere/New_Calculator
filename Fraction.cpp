@@ -36,6 +36,8 @@ Fraction::Fraction(string sValue){
 		cout <<"this is den "<< den1<<endl;
 cout << "right before reduction" <<endl;
 	Reduction();
+	checkValues();
+	isInt=false;
 cout <<"end of constructor "<< endl;
 }
 
