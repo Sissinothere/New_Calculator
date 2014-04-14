@@ -36,7 +36,7 @@ Fraction::Fraction(string sValue){
 		cout <<"this is den "<< den1<<endl;
 cout << "right before reduction" <<endl;
 	Reduction();
-	checkValues();
+	//checkValues();
 	isInt=false;
 cout <<"end of constructor "<< endl;
 }
@@ -67,6 +67,7 @@ void Fraction::Reduction(){
 cout << "in reduction"<< endl;
 cout <<"num1 in reducation"<<num1<< endl;
 cout <<"den1 in reduction" << den1<<endl;
+
 	if (num1 < den1){
 		cout << "in if 1"<< endl;
 		for (int i = num1; i >0; i--){
@@ -93,9 +94,9 @@ cout <<"den1 in reduction" << den1<<endl;
 		}
 	}
 	if(num1== den1){
-		cout << "1";
+		cout << "!!!!!!!!!!!!!!!!!1"<<endl;
 		isInt = true;
-		answer = 1;
+		answer = "1";
 		num1 = 1;
 		den1 = 1;
 
@@ -111,7 +112,12 @@ cout <<"den1 in reduction" << den1<<endl;
 					ss<< num1;
 					answer = ss.str();
 		}
+
 	}
+	if(num1==0){
+				answer="0";
+				isInt=true;
+			}
 		cout << answer<<endl;
 }
 
