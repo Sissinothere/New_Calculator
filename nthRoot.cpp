@@ -9,7 +9,7 @@ nthRoot::nthRoot(string str)
 	string tempScal = "";
 	int i = 0;
 
-	if(someroot.at(0) == '-')
+	if(someroot.at(0) == '-' && someroot.find("rt") < 100)
 	{
 		i++;
 		if(someroot.find("*") < 100)
@@ -77,8 +77,7 @@ nthRoot::nthRoot(string str)
 			simplify();
 		}
 	}
-
-	else
+	else if(someroot.find("rt") < 100)
 	{
 		if(someroot.find("*") < 100)
 		{
@@ -144,6 +143,24 @@ nthRoot::nthRoot(string str)
 
 			simplify();
 		}
+	}
+	else
+	{
+		for(i; i<str.length(); i++)
+		{
+			tempScal += str[i];
+		}
+		strScal = tempScal;
+
+		scal = atoi(tempScal.c_str());
+		n = 2;
+		num = 1;
+	
+		this->scal = scal;
+		this->n = n;
+		this->num = num;
+		simplify();
+
 	}
 }
 
