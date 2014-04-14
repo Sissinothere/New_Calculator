@@ -40,6 +40,45 @@ void Exponent::separate(string str)
 	}
 }
 
+void Exponent::findPowerType()
+{
+	 if(strPower.find("/")<100)
+	{
+		powerIsFrac = true;
+	}
+	else if(strPower.find("log")<100 || strPower.find("e")<100|| strPower.find("rt")<100|| strPower.find("pi")<100)
+	{
+		powerIsFrac = false;
+		powerIsInt = false;
+		if(strPower.find("-") < 100)
+		{
+			int i = 1;
+			string tempPow;
+			for(i; i<strPower.length(); i++)
+			{
+				tempPow += strPower[i];
+			}
+			if(strBase != "1")
+			{
+				answer = "1/" + strBase + "^" + tempPow;
+			}
+			else if(strBase == "1")
+			{
+				baseIsInt = true;
+				answer = "1";
+			}
+		}
+		else
+		{
+			answer = input;
+		}
+	}
+	else
+	{
+		powerIsInt = true;
+	}
+}
+
 void Exponent::findBaseType()
 {
 	if(strBase.find("log")<100 || strBase.find("e")<100|| strBase.find("rt")<100|| strBase.find("pi")<100)
@@ -52,28 +91,43 @@ void Exponent::findBaseType()
 			power = -power;
 			ss << power;
 			ss >> tempStrPower;
-			answer = "1/" + strBase + "^" + tempStrPower;
+			if(power != 1)
+			{
+				answer = "1/" + strBase + "^" + tempStrPower;
+			}
+			else if(power == 1)
+			{
+				answer = "1/" + strBase;
+			}
+		}
+		else if(power == 1 && powerIsInt == true)
+		{
+			answer = strBase;
+		}
+		else if(power == 0 && powerIsInt == true)
+		{
+			simpToInt = true;
+			answer = "1";
 		}
 		else
 		{
-			answer = input;
-		}
-	}
-	else if(strPower.find("log")<100 || strPower.find("e")<100|| strPower.find("rt")<100|| strPower.find("pi")<100)
-	{
-		if(strPower.find("-") < 100)
-		{
-			int i = 1;
-			string tempDingo;
-			for(i; i<strPower.length(); i++)
+			if(strPower.find("-") < 100)
 			{
-				tempDingo += strPower[i];
+				int i = 1;
+				string tempPow;
+				for(i; i<strPower.length(); i++)
+				{
+					tempPow += strPower[i];
+				}
+				answer = "1/" + strBase + "^" + tempPow;
 			}
-			answer = "1/" + strBase + "^" + tempDingo;
+			else
+			{
+				answer = input;
+			}
 		}
-		else	
-			answer = input;
 	}
+
 	else if(strBase.find("/")<100)
 	{
 		baseIsFrac = true;
@@ -84,17 +138,7 @@ void Exponent::findBaseType()
 	}
 }
 
-void Exponent::findPowerType()
-{
-	 if(strPower.find("/")<100)
-	{
-		powerIsFrac = true;
-	}
-	else
-	{
-		powerIsInt = true;
-	}
-}
+
 
 void Exponent::simplify()
 {
@@ -305,6 +349,11 @@ void Exponent::simplify()
 			ss << powerFunc(base, power);
 			ss >> answer;
 		}
+		if(strBase == "1")
+		{
+			simpToInt = true;
+			answer = "1";
+		}
 	}
 	else if(baseIsFrac == true && powerIsInt == true)
 	{
@@ -383,11 +432,15 @@ void Exponent::simplify()
 			answer = strExNumerBase + "/" + strExDenomBase;
 		}
 	}
+	if(strBase == "1")
+	{
+		simpToInt = true;
+		answer = "1";
+	}
 	else
 	{
 	}
 }
-
 
 bool Exponent::canSimplifyToFrac()
 {
@@ -417,6 +470,7 @@ string Exponent::getPower()
 
 string Exponent::getAnswer()
 {
+	cout << "This is nrt answer:" << answer << endl;
 	return answer;
 }
 
