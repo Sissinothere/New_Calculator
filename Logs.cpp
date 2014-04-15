@@ -31,9 +31,9 @@ Logs::Logs(string str){ //log_50:5
 	}
 
 	frontIntNumb = atoi(frontnumb.c_str());
-	cout<<"frontnumb is "<<frontnumb<<endl;
-	cout<<"frontIntNumb is "<<frontIntNumb<<endl;
-	cout<<endl;
+//	cout<<"frontnumb is "<<frontnumb<<endl;
+//	cout<<"frontIntNumb is "<<frontIntNumb<<endl;
+//	cout<<endl;
 
 	for(i; str[i]!='_' &&i<=str.length();i++){				//try to get ride of "log_"
 		s += str[i];
@@ -42,7 +42,7 @@ Logs::Logs(string str){ //log_50:5
 	//check if user enter a right format;
 	if(s.find("log")<20) {}//do nothing;
 	else{
-		cout<<"you does not match format 'zlog_x:y'"<<endl;
+//		cout<<"you does not match format 'zlog_x:y'"<<endl;
 		return; //exist from the function;
 	}
 
@@ -70,7 +70,7 @@ Logs::Logs(string str){ //log_50:5
 	numb = atoi(tempnumb.c_str());
 
 	//make sure the initial value changed.
-	cout<<"frontIntNumb is check in constructor "<<strfronumb<<endl;
+//	cout<<"frontIntNumb is check in constructor "<<strfronumb<<endl;
 
 	this->numb = numb;
 	this->base = base;
@@ -87,9 +87,9 @@ Logs::Logs(string str){ //log_50:5
 bool Logs::canSimplifytoInt(){
 	//base^x = numb; if x is a integer, return it as integer.
 	//log_3:9 = 2; this string = 2;
-	cout<<"in log () class"<<endl;
-	cout<<"numb is "<<numb<<"base is "<<base<<endl;
-	cout<<endl;
+//	cout<<"in log () class"<<endl;
+//	cout<<"numb is "<<numb<<"base is "<<base<<endl;
+//	cout<<endl;
 	double result;
 	result= log(numb)/log(base);
 
@@ -104,7 +104,7 @@ bool Logs::canSimplifytoInt(){
 bool Logs::canSimplifytoFra(){
 	//base^x = numb; if x is a integer, return it as integer.
 	//log_9:3 = 1/2; this string = 2;
-	cout<<"in log canSimplifytoFra() class"<<endl;
+//	cout<<"in log canSimplifytoFra() class"<<endl;
 	double result;
 	result= log(base)/log(numb);
 
@@ -115,7 +115,7 @@ bool Logs::canSimplifytoFra(){
 }
 
 void Logs::Simplify(){
-	cout<<"in log getSimplify function"<<endl;
+//	cout<<"in log getSimplify function"<<endl;
 	double result;
 	string value;
 	cout <<"str base is "<< strbase<<endl;
@@ -141,7 +141,7 @@ void Logs::Simplify(){
 
 string Logs::getSimplify(){
 	string temp;
-	cout<<"<getFrontIntNumb(); is "<<getFrontIntNumb()<<endl;
+//	cout<<"<getFrontIntNumb(); is "<<getFrontIntNumb()<<endl;
 	ss.clear();
 	ss<<getFrontIntNumb();
 	ss>>temp;
@@ -169,8 +169,8 @@ string Logs::getSimplify(){
 	}
 
 	//temp +=somelog;
-	cout<<"temp is "<<temp<<endl;
-	cout<<"Logs::getSimplify() "<<temp<<endl;
+//	cout<<"temp is "<<temp<<endl;
+//	cout<<"Logs::getSimplify() "<<temp<<endl;
 	return temp;
 }
 
@@ -241,7 +241,7 @@ string Logs::FinalSplit(){
 	 if(!cansplit){ //non of these case, return as it is.
 		 return somelog;
 	 }
-	 cout<<"TempString is "<<tempString<<endl;
+//	 cout<<"TempString is "<<tempString<<endl;
 	 //here I return a new string Final, but I can alwasy let somelog = Final
 	 // and change the value using pointer., no need to return.
 	 string Final = "";//get ride of first '+' sign
@@ -296,8 +296,8 @@ void Logs::FormNewLog(){
 void Logs::add(Logs& lg){ //need to conver double to string.
 	if(frontIntNumb<0||lg.getFrontIntNumb()<0){
 		substract(lg);
-		cout<<endl;
-		cout<<"im in log add to -"<<endl;
+//		cout<<endl;
+//		cout<<"im in log add to -"<<endl;
 	}
 	else if(lg.getBase()==base&&lg.getNumb()==numb){
 //		cout<<"frontIntNumb is "<<frontIntNumb<<endl;
@@ -347,4 +347,3 @@ void Logs::Multip(Logs& lg){
 		somelog += "*" + lg.getAnswer();
 	}
 }
-
