@@ -1,11 +1,11 @@
-#include "Logs.h" //8
+#include "Logs.h"
 #include <stdlib.h>
-//Xixi
 
 
 
-//need to fix log_3:3 = 1/1; and 2log_3:2 simplify = log_3:4;
-Logs::Logs(string str){ //log_50:5
+
+
+Logs::Logs(string str){
 	somelog = str;
 	string s = "";
 	string tempbase = "";
@@ -31,9 +31,7 @@ Logs::Logs(string str){ //log_50:5
 	}
 
 	frontIntNumb = atoi(frontnumb.c_str());
-//	cout<<"frontnumb is "<<frontnumb<<endl;
-//	cout<<"frontIntNumb is "<<frontIntNumb<<endl;
-//	cout<<endl;
+
 
 	for(i; str[i]!='_' &&i<=str.length();i++){				//try to get ride of "log_"
 		s += str[i];
@@ -42,7 +40,7 @@ Logs::Logs(string str){ //log_50:5
 	//check if user enter a right format;
 	if(s.find("log")<20) {}//do nothing;
 	else{
-//		cout<<"you does not match format 'zlog_x:y'"<<endl;
+
 		return; //exist from the function;
 	}
 
@@ -69,27 +67,22 @@ Logs::Logs(string str){ //log_50:5
 
 	numb = atoi(tempnumb.c_str());
 
-	//make sure the initial value changed.
-//	cout<<"frontIntNumb is check in constructor "<<strfronumb<<endl;
+
 
 	this->numb = numb;
 	this->base = base;
 	this->frontIntNumb = frontIntNumb;
 
 	if(canSimplifytoFra()||canSimplifytoInt()){
-		//check if it can be simplified
-		Simplify();//if it can, simplified it.
+
+		Simplify();
 	}else{
-//		FinalSplit();
+
 	}
 }
 
 bool Logs::canSimplifytoInt(){
-	//base^x = numb; if x is a integer, return it as integer.
-	//log_3:9 = 2; this string = 2;
-//	cout<<"in log () class"<<endl;
-//	cout<<"numb is "<<numb<<"base is "<<base<<endl;
-//	cout<<endl;
+
 	double result;
 	result= log(numb)/log(base);
 
@@ -238,14 +231,14 @@ string Logs::FinalSplit(){
 	 if(!cansplit){ //non of these case, return as it is.
 		 return somelog;
 	 }
-//	 cout<<"TempString is "<<tempString<<endl;
+//
 	 //here I return a new string Final, but I can alwasy let somelog = Final
 	 // and change the value using pointer., no need to return.
 	 string Final = "";//get ride of first '+' sign
 	 for(int i = 1; i < tempString.length();i++){
 		 Final+=tempString[i];
 	 }
-	// cout<<Final<<endl;
+
 	 somelog=Final;
 	 return Final;
 }
@@ -264,9 +257,7 @@ string Logs::getAnswer(){
 
 	return somelog;
 }
-//string Logs::getStrfronstrNumb(){
-//	return strfronumb;
-//}
+
 
 void Logs::FormNewLog(){
 	string newlog;
@@ -293,21 +284,20 @@ void Logs::FormNewLog(){
 void Logs::add(Logs& lg){ //need to conver double to string.
 	if(frontIntNumb<0||lg.getFrontIntNumb()<0){
 		substract(lg);
-//		cout<<endl;
-//		cout<<"im in log add to -"<<endl;
+
 	}
 	else if(lg.getBase()==base&&lg.getNumb()==numb){
-//		cout<<"frontIntNumb is "<<frontIntNumb<<endl;
+
 		frontIntNumb +=lg.getFrontIntNumb();
 		FormNewLog();
-//		cout<<"im in log add"<<endl;
+
 	}
 
 	else if(lg.getBase()==base){
-//		cout<<"doing the log add()"<<endl;
+
 		this->numb *= lg.getNumb();
 		FormNewLog();//update
-		//everytime change base and numb need to use this function.
+
 	}
 	else{
 		somelog += "+" + lg.getAnswer();//two string can add tegether.
@@ -316,8 +306,8 @@ void Logs::add(Logs& lg){ //need to conver double to string.
 
 void Logs::substract(Logs& lg){
 	if(lg.getBase()==base&&lg.getNumb()==numb){
-		//this->numb /= lg.getNumb();
-		//here may need to pass to the fraction class, because it cannot has decimal number.
+
+
 		frontIntNumb +=lg.getFrontIntNumb();
 		FormNewLog();
 	}else{
