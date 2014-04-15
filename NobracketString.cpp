@@ -198,8 +198,27 @@ void NobracketString::simplifynumbers(){ //maybe need to delete the object I cre
 	}
 	else if(tempnumb.find("log")<100){
 		Logs* lg = new Logs(somenumbs[i]);
-
 		somenumbs[i]=lg->getSimplify();
+
+		if(somenumbs[i]==expression){					//if user enter a log only and it cannot be simplify
+//			cout<<" log expression cannot be simplify()"<<endl;
+			expression = lg->FinalSplit();				//try split it;
+			cout<<"___log is split to these parts: "<<expression<<endl;
+			if(somenumbs[i]==expression){
+							//if the log cannot be split, do nothing.
+			}else{
+				somenumbs.erase(somenumbs.begin());
+				type.clear();
+				cout<<"*******type size is*******"<<type.size()<<endl;
+				cout<<endl;
+				separateString();
+				cout<<"*******type size is after separate*******"<<type.size()<<endl;
+				cout<<endl;
+				simplifynumbers();
+			}
+		}
+		cout<<"*******type size is after simplifynumbers*******"<<type.size()<<endl;
+		cout<<endl;
 		cout<<"somenumbs[i] is "<<somenumbs[i]<<endl;
 		if(lg->canSimplifytoInt()){			//check if it can be simplified
 
@@ -211,24 +230,7 @@ void NobracketString::simplifynumbers(){ //maybe need to delete the object I cre
 			type.push_back("frac");
 			cout<<"in the log to fra here"<<endl;			//else if it simplifies to fraction, put "fra" to vector type;
 		}else{
-//			lg->FinalSplit();						//try to split the log;
-//			if(lg->getAnswer().find("+")){				//can split to different log;
-///*
-// *			 	for(int i=0;i<expression.length();i++){
-//					if(expression[i]=='+'||expression[i]=='*'){
-//					op.push_back(expression[i]);
-//					somenumbs.push_back(temp);
-//					temp = "";
-//			}
-//			else
-//				temp +=expression[i];
-//		}
-//			somenumbs.push_back(temp);
-// */
-//			}
-//			else
-				type.push_back("log");					//if it can't, type = log;
-			//cout<<"in the log to log here"<<endl;
+				type.push_back("log");							//cout<<"in the log to log here"<<endl;
 		}
 	}
 	//root was here
@@ -628,6 +630,7 @@ void NobracketString::divide(string Anumb,string Atype, string Bnumb, string Bty
   		//}
   		//}
   		if(op[i]=='*'){
+  			//for(int j=i+1;j<=op.size();i++)
   			cout<<"i is : "<<i<<endl;//if op has '*'
   			if(i==0){
   				cout<<"if(i==0){ : "<<endl;// if '*' in the index position 0
@@ -674,7 +677,15 @@ void NobracketString::divide(string Anumb,string Atype, string Bnumb, string Bty
 cout<<endl;
 
 cout<<"-----------i am between loop, return one value: true=1:  "<<isReturnOneNumb<<endl;
+cout<<"-----------i am between loop, return one value: true=1:  "<<isReturnOneNumb<<endl;
+cout<<"the type size is "<<type.size()<<endl;
+cout<<"the numb size is "<<somenumbs.size()<<endl;
+cout<<endl;
 
+	for(int i=0;type.size()-1>=somenumbs.size();i++){
+		type.pop_back();
+		cout<<"erase"<<endl;
+	}
 int tempSize=0;
   	for(int i=0;i<op.size();i++){				//start to check if they have the same type; ad do the calculation
   		for(int j=i+1;j<op.size()+1;j++)
@@ -777,22 +788,6 @@ int tempSize=0;
   			}//end of the int j loop
 //  					cout<<"end check for type here"<<j<<endl;
   		}//end of the int i loop
-
- // 	if(!havesametype)
- // 	{										//if does not have same type, set answer as simplify version string;
- // 		for(int i=0;i<op.size();i++)		//the formFinalAnser() will do this steps;
- // 		{
- // 			opAnswer += somenumbs[i]+op[i];
- // 		}
- // 		opAnswer += somenumbs[somenumbs.size()-1];
- // 	}
- // 	else{cout<<"it is done it's calculation"<<endl;}
-//  	if(!op.empty()){
-//  		cout<<"op is not empty"<<endl;
-//  		if(op[0]=='+'){
-//  			add(somenumbs[0],type[0],somenumbs[1],type[1]);
-//  		}
-//  	}
   }
 
 

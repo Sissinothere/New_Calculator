@@ -1,10 +1,3 @@
-/*
-* Pi.h
-*
-*  Created on: Apr 11, 2014
-*  Author: Abel Mak
-*/
-
 #ifndef PI_H_
 #define PI_H_
 
@@ -19,9 +12,9 @@ using namespace std;
 class Pi
 {
         double Pi_value;
-        int coefficient;
-        int powerCount;
-        string sValue;
+        signed int coefficient, denomCoef;
+
+        string sValue, denominator, numerator;
         string answer;
         stringstream coefficientHandle;
 
@@ -30,14 +23,16 @@ public:
         Pi(string sValue);
         void setCoefficient();
         int getCoefficient();
+        int getdenomCoef();
         string getAnswer();
+
+        //bool canSimplifyToInt;
+        //bool canSimplifyToFrac;
         void clearBuffer();
 
         void Multiply(Pi& in);
         void Divide(Pi& in);
         void Add(Pi& in);
-        void Subtract(Pi& in);
 };
-
 
 #endif /* PI_H_ */
