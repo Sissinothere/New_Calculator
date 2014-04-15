@@ -205,23 +205,23 @@ void Exponent::simplify()
 			if(strNumTop == "1")
 			{
 				if(n != "2")
-					answer = "1/" + n + "rt:" + strNumBot;
+					answer = "(1/(" + n + "rt:" + strNumBot + "))";
 				else
-					answer = "1/sqrt:" + strNumBot;
+					answer = "(1/(sqrt:" + strNumBot +"))";
 			}
 			else if(strNumBot == "1")
 			{
 				if(n != "2")
-					answer = n + "rt:" + strNumTop;
+					answer = "(" + n + "rt:" + strNumTop + ")";
 				else
-					answer = "sqrt:" + strNumTop;
+					answer = "(sqrt:" + strNumTop +")";
 			}
 			else
 			{
 				if(n != "2")
-				answer = n + "rt:" + strNumTop + "/" + n + "rt:" + strNumBot;
+				answer = "((" + n + "rt:" + strNumTop + ")/(" + n + "rt:" + strNumBot + "))";
 			else
-				answer = "sqrt:" + strNumTop + "/sqrt:" + strNumBot;
+				answer = "((sqrt:" + strNumTop + ")/(sqrt:" + strNumBot +"))";
 			}
 		}
 		else
@@ -244,26 +244,26 @@ void Exponent::simplify()
 			if(1 == 1)
 			{
 				if(strNumBot == "1")
-			{
+				{
 				if(n != "2")
-					answer = "1/" + n + "rt:" + strNumTop;
+					answer = "(1/(" + n + "rt:" + strNumTop + "))";
 				else
-					answer = "1/sqrt:" + strNumTop;
-			}
+					answer = "(1/(sqrt:" + strNumTop + "))";
+				}
 			else if(strNumTop == "1")
 			{
 				if(n != "2")
-					answer = n + "rt:" + strNumBot;
+					answer = "(" + n + "rt:" + strNumBot + ")";
 				else
-					answer = "sqrt:" + strNumBot;
+					answer = "(sqrt:" + strNumBot + ")";
 			}
 			}
 			else
 			{
 				if(n != "2")
-					answer = n + "rt:" + strNumBot + "/" + n + "rt:" + strNumTop;
+					answer = "((" + n + "rt:" + strNumBot + ")/(" + n + "rt:" + strNumTop + "))";
 				else
-					answer = "sqrt:" + strNumBot + "/sqrt:" + strNumTop;
+					answer = "((sqrt:" + strNumBot + ")/(sqrt:" + strNumTop + "))";
 			}
 		}
 	}
@@ -296,9 +296,9 @@ void Exponent::simplify()
 			ss >> n;
 
 			if(n != "2")
-				answer = n + "rt:" + strNum;
+				answer = "(" + n + "rt:" + strNum + ")";
 			else
-				answer = "sqrt:" + strNum;
+				answer = "(sqrt:" + strNum +")";
 		}
 		else
 		{
@@ -312,9 +312,9 @@ void Exponent::simplify()
 			ss >> n;
 
 			if(n != "2")
-				answer = "1/" + n + "rt:" + strNum;
+				answer = "(1/(" + n + "rt:" + strNum + "))";
 			else
-				answer = "1/sqrt:" + strNum;
+				answer = "(1/(sqrt:" + strNum + "))";
 		}
 
 	}

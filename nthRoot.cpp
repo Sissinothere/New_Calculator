@@ -70,14 +70,19 @@ nthRoot::nthRoot(string str)
 			n = atoi(tempN.c_str());
 			num = atoi(tempNum.c_str());
 	
-			scal = -1;
+			scal = 1;
 			this->n = n;
 			this->num = num;
 
 			simplify();
+			isInt = false;
+			isFrac = true;
+
+
+			//cout << "This is someroot" << someroot << endl;
 		}
 	}
-	else if(someroot.find("rt") < 100)
+	else if(someroot.find("rt") < 100)//had an else if
 	{
 		if(someroot.find("*") < 100)
 		{
@@ -316,7 +321,19 @@ bool nthRoot::canSimplifytoInt()
 	}
 	cout<<"------------"<<endl;
 }
-
+bool nthRoot::canSimpifytoFrac()
+{
+	if(isFrac == true)
+		{
+			cout << "Yes, it can be simplified into a fraction." << endl;
+			return true;
+		}
+		else
+		{
+			cout << "Cannot be simplified into a fraction." << endl;
+			return false;
+		}
+}
 int nthRoot::getN()
 {
 	return n;
@@ -334,12 +351,24 @@ int nthRoot::getScal()
 
 string nthRoot::getSimp()
 {
-	formNewRoot();
-	return someroot;
+	if(isFrac == true)
+	{
+		formNewRoot();
+		string tempAns;
+		tempAns = someroot;
+		someroot = "(1/(" + tempAns + "))";
+		return someroot;
+	}
+	else
+	{
+		formNewRoot();
+		return someroot;
+	}
 }
 
 string nthRoot::getAns()
 {
+	cout << "Someroot in getAns()" << someroot << endl;
 	return someroot;
 }
 

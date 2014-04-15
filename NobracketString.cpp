@@ -120,9 +120,10 @@ void NobracketString:: separateString(){
 					if(expression[i]=='/'){				//if has / record,
 						cout<<"!!!!has ///////////"<<endl;
 
-						op.push_back(expression[i]);
-						somenumbs.push_back(temp);
-						temp="";
+						//op.push_back(expression[i]);
+						//somenumbs.push_back(temp);
+						temp +=expression[i];
+						//temp="";
 					}else{
 						temp +=expression[i];
 					}
@@ -153,9 +154,37 @@ void NobracketString::simplifynumbers(){ //maybe need to delete the object I cre
 	for(int i = 0; i<somenumbs.size();i++){
 
 	string tempnumb = somenumbs[i];
-	cout<<"tempnumb is "<<tempnumb<<endl;
+	cout<<"tempnumb is 999999"<<tempnumb<<endl;
+	if(tempnumb.find("^")<100){
+			Exponent* power = new Exponent(somenumbs[i]);
+			somenumbs[i]=power->getAnswer();
 
-	if(tempnumb.find("/")<100 && tempnumb.find("p")>100){					//im each value, if it contains /,
+			if(power->canSimplifyToInt()){
+				type.push_back("int");
+			}else if(power->canSimplifyToFrac()){
+				type.push_back("frac");
+			}else{
+				type.push_back("exp");
+			}
+		}
+	else if(tempnumb.find("rt")<100){
+			nthRoot* power = new nthRoot(somenumbs[i]);
+													//will do the simplification in constructor.
+			somenumbs[i]=power->getSimp();		//get a string type
+
+
+			if(power->canSimplifytoInt()){
+				type.push_back("int");
+
+			}
+			else if(power->canSimpifytoFrac()){
+				type.push_back("frac");
+			}else{
+				cout<<"0000000000000000"<<endl;
+				type.push_back("root");
+			}
+		}
+	else if(tempnumb.find("/")<100 && tempnumb.find("p")>100){					//im each value, if it contains /,
 		cout<<"im in fraction"<<endl;
 		Fraction* fra = new Fraction(somenumbs[i]);
 		somenumbs[i]=fra->getAnswer();	//change the vector number to the 		simplify number.
@@ -202,35 +231,8 @@ void NobracketString::simplifynumbers(){ //maybe need to delete the object I cre
 			//cout<<"in the log to log here"<<endl;
 		}
 	}
-	else if(tempnumb.find("rt")<100){
-		nthRoot* power = new nthRoot(somenumbs[i]);
-												//will do the simplification in constructor.
-		somenumbs[i]=power->getSimp();		//get a string type
-
-
-		if(power->canSimplifytoInt()){
-			type.push_back("int");
-//
-//		}
-//		else if(power->canSimpifytoFrac()){
-//			type.push_back("frac");
-		}else{
-			cout<<"0000000000000000"<<endl;
-			type.push_back("root");
-		}
-	}
-	else if(tempnumb.find("^")<100){
-		Exponent* power = new Exponent(somenumbs[i]);
-		somenumbs[i]=power->getAnswer();
-
-		if(power->canSimplifyToInt()){
-			type.push_back("int");
-		}else if(power->canSimplifyToFrac()){
-			type.push_back("frac");
-		}else{
-			type.push_back("exp");
-		}
-	}
+	//root was here
+	//was here
 	else if(tempnumb.find("Pi")<100||tempnumb.find("pi")<100){
 		type.push_back("pi");
 	}
@@ -600,7 +602,7 @@ void NobracketString::divide(string Anumb,string Atype, string Bnumb, string Bty
   		  		i = 0;
   		  	}
   		temporarySize= op.size();
-  		if(op[i]=='/'){
+  		/*if(op[i]=='/'){
   			if(i==0){
   				divide(somenumbs[0],type[0],somenumbs[1],type[1]);
   				if(isReturnOneNumb){									//if the answer == is return one value example: log_3:4;
@@ -620,11 +622,11 @@ void NobracketString::divide(string Anumb,string Atype, string Bnumb, string Bty
   					op.erase(op.begin()+(i));							//erase the '*'
 //  					cout<<"the mutip() get answer is now "<<somenumbs[i]<<endl;
 //  					cout<<"im in the calculating function delect '*' sign DOES NOT in the index 0"<<endl;
-  				}
-  				else{
-  					cout<<"the '/' sign DOES NOT in the index 0, and the answer return more then one value"<<endl;}
-  		}
-  		}
+  				}*/
+  				//else{
+  					//cout<<"the '/' sign DOES NOT in the index 0, and the answer return more then one value"<<endl;}
+  		//}
+  		//}
   		if(op[i]=='*'){
   			cout<<"i is : "<<i<<endl;//if op has '*'
   			if(i==0){

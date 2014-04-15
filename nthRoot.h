@@ -20,6 +20,7 @@ class nthRoot
 	int num;
 	int scal;
 	bool isInt;
+	bool isFrac;
 
 	public:
 		nthRoot(string str);
