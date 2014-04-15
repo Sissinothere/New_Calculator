@@ -1,15 +1,7 @@
 
-//============================================================================
-// Name        : Calculator.cpp
-// Author      : Xixi Ruan
-// Version     :
-// Copyright   : Your copyright notice
-// Description : Calculator in C++, Ansi-style
-//============================================================================
-//
 //#include "Calculator1.cpp"
 //#include "Simplify.cpp"
-//abel was here
+
 
 
 //==================================
@@ -49,25 +41,22 @@ string dropSpace(string str){
 	sr->Inject();
 	sr->Parenthesis();
 
-//	cout<<"============================================="<<endl;
-//	cout<<"the answer is:"<<endl;
-//	cout<<str + " = "<<sr->getFinalAnswer()<<endl;
-//	cout<<"============================================="<<endl;
+
 	return (str +" = "+ (sr->getFinalAnswer()));
 
 }
 string getFunction(){
 	string function;
 	cout<< "Please enter expression: ";
-	//cin>>function;
+
 	getline(cin,function);//this function need to link to the class stringreader.
 	return dropSpace(function);
-	//cout<<"Your answer is: "<<endl;
+
 }
 void help(){
 	cout<<"------------------------------------------------------------"<<endl;
 	cout<<"This calculator is design to calculate simple and complex mathematics calculation."<<endl;
-	cout<<"	(but please do not give a supper complex expression)"<<endl;
+	cout<<endl;
 	cout<<"Operator specifications: "<<endl;
 	cout<< "	< 'x to the power of y' == x^y >" << endl;
 	cout<< "	< 'the square root of x' == sqrt:x >" << endl;
@@ -79,7 +68,7 @@ void help(){
 	cout<<'\t'<<"* Please enter a correct and complete expression."<<endl;
 	cout<<'\t'<<"* Do not enter '=' at the end of the expression."<<endl;
 	cout<<'\t'<<"* Can add () in the expression."<<endl;
-	cout<<'\t'<<"* Enter 'ans' to use the value from the last calculation."<<endl;
+	//cout<<'\t'<<"* Enter 'ans' to use the value from the last calculation."<<endl;
 	cout<<"------------------------------------------------------------"<<endl;
 
 }

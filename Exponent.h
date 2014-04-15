@@ -45,7 +45,7 @@ public:
 	string getBase();
 	string getPower();
 	string getAnswer();
-	
+
 	void add(Exponent& exp);
 	void divide(Exponent& exp);
 	void multiply(Exponent& exp);

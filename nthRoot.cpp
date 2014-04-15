@@ -66,6 +66,7 @@ nthRoot::nthRoot(string str)
 			}
 			strNum = tempNum;
 		
+			//scal = atoi(tempScal.c_str());
 			n = atoi(tempN.c_str());
 			num = atoi(tempNum.c_str());
 	
@@ -78,9 +79,10 @@ nthRoot::nthRoot(string str)
 			isFrac = true;
 
 
+			//cout << "This is someroot" << someroot << endl;
 		}
 	}
-	else if(someroot.find("rt") < 100)
+	else if(someroot.find("rt") < 100)//had an else if
 	{
 		if(someroot.find("*") < 100)
 		{
@@ -136,6 +138,7 @@ nthRoot::nthRoot(string str)
 			}
 			strNum = tempNum;
 		
+			//scal = atoi(tempScal.c_str());
 			n = atoi(tempN.c_str());
 			num = atoi(tempNum.c_str());
 	
@@ -235,24 +238,61 @@ void nthRoot::simplify()
 	if(num == 1)
 	{
 		isInt = true;
+		cout << scal << endl;
 	}
 	else if(num == -1 && n%2 != 0)
 	{
 		isInt = true;
 		scal = -scal;
 		num = -num;
+		cout << scal << endl;
 	}
 	else if(num < -1 && n%2 != 0)
 	{
 		scal = -scal;
+		if(scal == 1)
+		{
+			if(n == 2)
+				cout << "sqrt:" << num << endl;
+			else
+				cout << n << "rt:" << num << endl;
+		}
+		else if(scal == -1)
+		{
+			if(n == 2)
+				cout << "-sqrt:" << num << endl;
+			else
+				cout <<"-" << n << "rt:" << num << endl;
+		}
+		else if(n == 2)
+			cout << scal << "*sqrt:" << num << endl;
+		else
+			cout << scal << "*" << n << "rt:" << num << endl;
 	}
 	else if(num == -1 && n%2 == 0)
 	{
 		isInt = true;
+		cout << scal << endl;
 	}
-	else
+	else if(scal == 1)
 	{
+		if(n == 2)
+			cout << "sqrt:" << num << endl;
+		else
+			cout << n << "rt:" << num << endl;
 	}
+	else if(scal == -1)
+	{
+		if(n == 2)
+			cout << "-sqrt:" << num << endl;
+		else
+			cout <<"-" << n << "rt:" << num << endl;
+	}
+	else if(n == 2)
+		cout << scal << "*sqrt:" << num << endl;
+	else
+		cout << scal << "*" << n << "rt:" << num << endl;
+
 }
 
 int nthRoot::power(int base, int pow)
@@ -267,24 +307,30 @@ int nthRoot::power(int base, int pow)
 bool nthRoot::canSimplifytoInt()
 {
 
-
+	//isInt = false;
+	//simplify();
 	if(isInt == true)
 	{
+		cout << "Yes, it can be simplified into an integer." << endl;
 		return true;
 	}
 	else
 	{
+		cout << "Cannot be simplified into integer." << endl;
 		return false;
 	}
+	cout<<"------------"<<endl;
 }
 bool nthRoot::canSimpifytoFrac()
 {
 	if(isFrac == true)
 		{
+			cout << "Yes, it can be simplified into a fraction." << endl;
 			return true;
 		}
 		else
 		{
+			cout << "Cannot be simplified into a fraction." << endl;
 			return false;
 		}
 }
@@ -322,6 +368,7 @@ string nthRoot::getSimp()
 
 string nthRoot::getAns()
 {
+	cout << "Someroot in getAns()" << someroot << endl;
 	return someroot;
 }
 
@@ -439,10 +486,18 @@ void nthRoot::formNewRoot()
 
 void nthRoot::add(nthRoot& rt)
 {
+	/*
+	cout << rt.getAns()<<endl;
+	if(rt.getAns().at(0)=='-'){
+		this->subtract(rt);
+	}
+	*/
 	if(num == rt.getNum() && n == rt.getN())
 	{
 		scal = scal + rt.getScal();
+		//cout << scal << endl;
 		formNewRoot();
+		//cout << someroot << endl;
 	}
 	else if(rt.someroot.find("-") < 100)
 	{
@@ -451,6 +506,7 @@ void nthRoot::add(nthRoot& rt)
 	else
 	{
 		someroot = getSimp() + "+" + rt.getSimp();
+		//cout << someroot << endl;
 	}
 }
 
@@ -461,7 +517,9 @@ void nthRoot::subtract(nthRoot& rt)
 	if(num == rt.getNum() && n == rt.getN())
 	{
 		scal = scal - rt.getScal();
+		//cout << scal << endl;
 		formNewRoot();
+		//cout << someroot << endl;
 	}
 	else if(rt.getAns().at(0) == '-')
 	{
@@ -471,6 +529,7 @@ void nthRoot::subtract(nthRoot& rt)
 	else
 	{
 		someroot = getSimp() + "-" + rt.getSimp();
+		//cout << someroot << endl;
 	}
 }
 
@@ -479,8 +538,10 @@ void nthRoot::multiply(nthRoot& rt)
 	if(num == rt.getNum() && n == rt.getN())
 	{
 		scal = scal * rt.getScal() * num;
+		//cout << scal << endl;
 		formNewRoot();
 		someroot = strScal;
+		//cout << someroot << endl;
 	}
 	else if(rt.getNum() == 1)
 	{
@@ -500,7 +561,9 @@ void nthRoot::multiply(nthRoot& rt)
 		scal = scal * rt.getScal();
 		num = num * rt.getNum();
 		simplify();
-		someroot = getSimp();
+		//formNewRoot();
+		someroot = getSimp();  // + "*" + rt.getSimp();
+		//cout << someroot << endl;
 	}
 	else
 		someroot = getSimp() + "*" + rt.getSimp();
@@ -514,8 +577,10 @@ void nthRoot::divide(nthRoot& rt)
 		if(num == rt.getNum() && n == rt.getN())
 		{
 			scal = scal / rt.getScal();
+			//cout << scal << endl;
 			formNewRoot();
 			someroot = strScal;
+			//cout << someroot << endl;
 		}
 		else if(n == rt.getN() && num%rt.getNum() == 0)
 		{
@@ -523,7 +588,9 @@ void nthRoot::divide(nthRoot& rt)
 			rt.scal = 1;
 			num = num / rt.getNum();
 			simplify();
-			someroot = getSimp();
+			//formNewRoot();
+			someroot = getSimp();  // + "*" + rt.getSimp();
+			//cout << someroot << endl;
 		}
 		else
 		{
@@ -531,6 +598,7 @@ void nthRoot::divide(nthRoot& rt)
 			scal = scal / rt.getScal();
 			rt.scal = 1;
 			someroot = getSimp() + "/" + rt.getSimp();
+			//cout << someroot << endl;
 		}
 	}
 	else 
@@ -539,7 +607,12 @@ void nthRoot::divide(nthRoot& rt)
 		{
 			if(num == rt.getNum() && n == rt.getN())
 			{
+				
+				//scal = scal / rt.getScal();
+				//cout << scal << endl;
+				//formNewRoot();
 				someroot = strScal + "/" + rt.strScal;
+				//cout << someroot << endl;
 			}
 			else if(n == rt.getN() && num%rt.getNum() == 0)
 			{
@@ -557,7 +630,9 @@ void nthRoot::divide(nthRoot& rt)
 				rt.strScal = "1";
 				num = num / rt.getNum();
 				simplify();
-				someroot = scalTop + "/" + scalBot + "*" + getSimp();
+				someroot = scalTop + "/" + scalBot + "*" + getSimp();  // + "*" + rt.getSimp();
+				//cout << someroot << endl;
+			}
 		}	
 		else
 		{
@@ -568,3 +643,30 @@ void nthRoot::divide(nthRoot& rt)
 }
 
 
+/*
+int main()
+{
+
+	string a = "4rt:8"; //change values here in order to test various cases. sqrt: works the same as 2rt:...I think
+	string b = "2rt:18";  //
+
+	nthRoot* test1 = new nthRoot(a);
+	nthRoot* test2 = new nthRoot(b);
+	test1->multiply(*test2);				//uncomment the operators based on which one you want to do.
+	//test1->subtract(*test2);
+	//test1->multiply(*test2);
+	//test1->divide(*test2);
+	//cout << test2->getSimp() << endl;
+	cout << test1->getAns() << endl;
+	//cout<<test1->getScal()<<endl;
+	//cout<<test1->getN()<<endl;
+	//cout<<test1->getNum()<<endl;
+	//cout<<test1->getSimp()<<endl;
+	//cout<<test2->getScal()<<endl;
+	//cout<<test2->getN()<<endl;
+	//cout<<test2->getNum()<<endl;
+	//cout<<test2->getSimp()<<endl;
+
+	return 0;
+}
+*/

@@ -339,6 +339,7 @@ void Exponent::simplify()
 			ss << powerFunc(base, -power);
 			ss >> strExDenomBase;
 			answer = "1/" + strExDenomBase;
+			//ss >> answer;
 		}
 		else
 		{

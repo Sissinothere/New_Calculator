@@ -32,16 +32,16 @@ void StringReader::Inject(){
 	for (int i = 0; i < input.length();i++){
 		tempL= input.length();
 		if (input.at(i)=='-'&&input.at(i-1)=='-'){
-			cout << "before erase "<<input<<endl;
+			////cout << "before erase "<<input<<endl;
 			input.erase(i,1);
 			input.erase(i-1,1);
-			cout <<"afetr erase "<< input << endl;
+
 			input.insert(i-1,1,'+');
-			cout << "after inject "<<input<<endl;
+
 		}
 		if (tempL!=input.length()) i =0;
 	}
-	cout << input<<endl;
+	////cout << input<<endl;
 	tempL= input.length();
 	for (int i = 0; i < input.length();i++){
 		tempL= input.length();
@@ -55,7 +55,7 @@ void StringReader::Inject(){
 		}
 		if (tempL!=input.length()) i =0;
 	}
-	cout << input<<endl;
+	////cout << input<<endl;
 }
 
 bool StringReader::isParen(){
@@ -125,9 +125,10 @@ string StringReader::Parenthesis(){
 
 					int lengthy= input.length();
 					if(lengthy >2){
-						cout << "this is the last thing of input hopefully : "<<input.at(lengthy-2)<<endl;}
+						////cout << "this is the last thing of input hopefully : "<<input.at(lengthy-2)<<endl;
+					}
 
-					cout << "lol"<<endl;
+
 					string ifComplex;
 					if(lengthy >2){
 						if ((nbr->ansIsComplex()&&input.at(lengthy-2)=='*'&&complexC <1)||(nbr->ansIsComplex()&&input.at(lengthy-2)=='/'&&complexC <1)){
@@ -157,15 +158,14 @@ string StringReader::Parenthesis(){
 							string dist;
 							int tempsub =2;
 							for(int k = 0; k < ifComplex.length();k++){
-								cout <<ifComplex<<endl;
+
 								if (ifComplex.at(k)=='['){
 									ifComplex.erase(ifComplex.begin()+k);
-									cout << ifComplex<<endl;
-									cout << ifComplex.at(k-1)<<endl;
+
 									if (ifComplex.at(k-1)=='*'||ifComplex.at(k-1)=='/'){
 										ifComplex.erase(ifComplex.begin()+k-1);
-										cout << ifComplex <<endl;
-										//comp << '(';
+
+
 										comp << ifComplex.at(k-2);
 										dist += ifComplex.at(k-2);
 										ifComplex.erase(ifComplex.begin()+k-2);
@@ -184,7 +184,7 @@ string StringReader::Parenthesis(){
 										}else{
 											comp << '*';
 										}
-										cout << ifComplex<<endl;
+										//cout << ifComplex<<endl;
 										int erase = 0;
 										for(int z = k-tempsub; z < ifComplex.length()&&ifComplex.at(z)!='+';z++){
 											comp << ifComplex.at(z);
@@ -194,7 +194,7 @@ string StringReader::Parenthesis(){
 										ifComplex.erase(ifComplex.begin()+k-tempsub,ifComplex.begin()+erase+lengthy-4);//has erase +2
 										comp << ifComplex.at(k-tempsub);
 										ifComplex.erase(ifComplex.begin()+k-tempsub);
-										cout << "this is k: "<<k<<"this is tempsub: "<<tempsub<<endl;
+										//cout << "this is k: "<<k<<"this is tempsub: "<<tempsub<<endl;
 
 										int erase2;
 
@@ -229,7 +229,7 @@ string StringReader::Parenthesis(){
 							return Parenthesis();
 						}
 					}
-					cout << "lol1"<<endl;
+
 					////////////////////////////////////////////////////////////
 					//end of distribution handling
 					/////////////////////////////////////////////
@@ -248,7 +248,7 @@ string StringReader::Parenthesis(){
 
 
 					return Parenthesis();
-					return result;
+
 				}
 
 			}
