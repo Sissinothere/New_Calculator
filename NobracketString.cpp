@@ -155,7 +155,7 @@ void NobracketString::simplifynumbers(){ //maybe need to delete the object I cre
 
 	string tempnumb = somenumbs[i];
 	cout<<"tempnumb is 999999"<<tempnumb<<endl;
-	if(tempnumb.find("^")<100){
+	if(tempnumb.find("^")<100 && tempnumb.find("log")>100){ /////this lines needs to go into
 			Exponent* power = new Exponent(somenumbs[i]);
 			somenumbs[i]=power->getAnswer();
 
