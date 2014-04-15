@@ -46,15 +46,13 @@ void Integers::Divide(Integers& in)
 	}
 	else
 	{
-		//ans = "/" + numTwo; //add number to the stream
+
 		convert << numOne;
 		answer = convert.str() + "/";
-		cout<<"__________answer is "<< answer<<"numeber two is "<< numTwo<<endl;
-		//convert.clear();
+
 		ss << numTwo;
 		answer += ss.str();
-		cout<<"__________answer is "<< answer<<"numeber two is "<< numTwo<<endl;
-		//void answer; //return a string with the contents of the stream
+
 	}
 }
 
@@ -63,8 +61,7 @@ void Integers::Add(Integers& in)
 {
 
 	int ans =  this->getValue() + in.getValue();
-	cout<<"im in int add function ans is"<< ans<<endl;
-	//answer = result; //add number to the stream
+
 	ostringstream convert;
 	convert << ans;
 	answer = convert.str();
@@ -76,7 +73,7 @@ void Integers::Subtract(Integers& in)
 	{
 
 	int ans =  this->getValue() - in.getValue();
-	cout<<"im in int subtract function ans is"<< ans<<endl;
+
 	ostringstream convert;
 	convert << ans;      // insert the textual representation of 'Number' in the characters in the stream
 	answer = convert.str();
